@@ -2,7 +2,9 @@ name := "secretaryassistant"
  
 version := "1.0" 
       
-lazy val `secretaryassistant` = (project in file(".")).enablePlugins(PlayScala)
+lazy val `secretaryassistant` = (project in file(".")).enablePlugins(PlayScala).settings(
+  watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
+)
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
       
@@ -17,4 +19,4 @@ libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice,
 
 /*unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )*/
 
-      
+fork in Compile := true
