@@ -2,7 +2,7 @@ name := "secretaryassistant"
  
 version := "1.0" 
       
-lazy val `secretaryassistant` = (project in file(".")).enablePlugins(PlayScala).settings(
+lazy val `secretaryassistant` = (project in file(".")).enablePlugins(PlayScala,LauncherJarPlugin).settings(
   watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
 )
 
