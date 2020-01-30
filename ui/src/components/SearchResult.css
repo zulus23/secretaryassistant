@@ -1,0 +1,10 @@
+.gtk_search_result_container {
+    height: 100%;
+}
+.dx-datagrid-headers {
+    white-space: normal;
+}
+.dx-datagrid-nowrap.dx-datagrid-headers .dx-header-row > td > .dx-datagrid-text-content {
+    white-space: normal;
+    text-align: center;
+}

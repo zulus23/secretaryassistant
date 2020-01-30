@@ -1,11 +1,11 @@
 .gtk-main-container {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 100px 1fr 50px;
   grid-template-areas:
-          'header'
-          'main'
-          'footer';
+          'header header'
+          'left right '
+          'footer footer';
   height: 100vh;
 
 }
@@ -17,8 +17,12 @@
   padding: 0 16px;
   background-color: #648ca6;
 }
-.main {
-  grid-area: main;
+.leftside {
+  grid-area: left;
+  background-color: #8fd4d9;
+}
+.rightside {
+  grid-area: right;
   background-color: #8fd4d9;
 }
 .footer {

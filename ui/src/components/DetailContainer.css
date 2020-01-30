@@ -1,0 +1,24 @@
+.gtk_detail_container {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% 1fr;
+    grid-template-areas:
+            'supaddr supaddr'
+            'manager suptech';
+
+    grid-gap: 5px;
+}
+
+.gtk_grid_support_container {
+    grid-area: suptech;
+    text-align: center;
+}
+.gtk_grid_manager_container{
+    grid-area: manager;
+}
+.gtk_grid_address_container {
+    grid-area: supaddr;
+    text-align: center;
+
+}

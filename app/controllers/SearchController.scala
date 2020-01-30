@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import models.SearchRequest
+import models.{DetailCompanyRequest, SearchRequest}
 import play.api.libs.json.Json
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request}
 import repository.SearchRepository
@@ -16,7 +16,15 @@ class SearchController @Inject()(cc: ControllerComponents,repository:SearchRepos
 
   def search = Action.async(parse.json[SearchRequest]) { implicit  request =>
     val searchRequest = SearchRequest(request.body.searchValue,request.body.typeRequest)
-    val result = repository.searchCompanyByName("")
+    val result = repository.searchCompanyByName(searchRequest.searchValue)
      result.map(s => Ok(Json.toJson(s)))
   }
+  def loadDetail = Action.async(parse.json[DetailCompanyRequest]){ implicit request =>
+
+    val detailCompanyRequest  = DetailCompanyRequest(request.body.codeCompany)
+    val result = repository.loadDetailByCompany(detailCompanyRequest.codeCompany)
+    result.map(s => Ok(Json.toJson(s)))
+
+  }
+
 }

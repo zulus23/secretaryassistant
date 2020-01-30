@@ -33,6 +33,7 @@ object EnumUtils {
 object ImplicityFormat {
 
   implicit val formatSearchRequestJson = Json.format[SearchRequest]
+  implicit val formatDetailRequestJson = Json.format[DetailCompanyRequest]
 }
 
 object SearchType extends Enumeration {
@@ -48,3 +49,4 @@ object SearchType extends Enumeration {
 case class SearchRequest(val searchValue: String,
                          val typeRequest: SearchType)
 
+case class DetailCompanyRequest(val codeCompany: String)
