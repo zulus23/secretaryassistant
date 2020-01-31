@@ -1,21 +1,24 @@
 .gtk_detail_container {
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50% 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas:
-            'supaddr supaddr'
-            'manager suptech';
+            'manager'
+            'suptech';
 
-    grid-gap: 5px;
+    grid-row-gap: 10px;
 }
 
 .gtk_grid_support_container {
     grid-area: suptech;
-    text-align: center;
+    background-color: #3d8b3d;
+    position: relative;
 }
 .gtk_grid_manager_container{
     grid-area: manager;
+    background-color: cyan;
+    position: relative;
 }
 .gtk_grid_address_container {
     grid-area: supaddr;

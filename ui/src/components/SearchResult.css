@@ -1,5 +1,9 @@
 .gtk_search_result_container {
+    margin: 0 auto;
     height: 100%;
+    min-height: 100%;
+    position: absolute;
+    width: 100%;
 }
 .dx-datagrid-headers {
     white-space: normal;
@@ -7,4 +11,10 @@
 .dx-datagrid-nowrap.dx-datagrid-headers .dx-header-row > td > .dx-datagrid-text-content {
     white-space: normal;
     text-align: center;
+}
+.dx-texteditor-input {
+    font-size: 1.5em;
+}
+.dx-row.dx-data-row.dx-row-lines.dx-column-lines {
+    font-size: 1.15em;
 }

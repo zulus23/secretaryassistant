@@ -1,40 +1,46 @@
 import React from 'react';
 import {shallowEqual, useSelector} from "react-redux";
-import ArrayStore from "devextreme/data/array_store";
-import './TechnicalSupport.css'
 
-import DataGrid, {Column, HeaderFilter} from "devextreme-react/data-grid";
+import ArrayStore from 'devextreme/data/array_store';
+import './ManagerCompany.css'
+import DataGrid, {
+    Column,
+    ColumnFixing,
+    FilterRow,
+    GroupPanel,
+    HeaderFilter,
+    Pager,
+    Paging
+} from 'devextreme-react/data-grid'
 
-const TechnicalSupport = (props) => {
-    const supportLoad = useSelector(state => state.search.supports, shallowEqual);
+const ManagerCompany = (props) => {
+    const managerLoad = useSelector(state => state.search.managers, shallowEqual);
     const dataSource = new ArrayStore({
-        key: ['enterprise', 'nameEmployee'],
-        data: supportLoad
+        key: ['enterprise','name'],
+        data: managerLoad
     });
     return (
-
-        <div className='gtk-support-list-container'>
-            <p className='gtk-list-support-header'>Техническая поддержка</p>
-            <div className='gtk-support-grid-container'>
-            <DataGrid dataSource={dataSource} className='gtk-support-grid'
+        <div className='gtk-manager-list-container'>
+            <p className='gtk-list-manager-header'>Ответственные менеджеры</p>
+            <div className='gtk-manager-grid-container'>
+            <DataGrid dataSource={dataSource} className='gtk-manager-grid'
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}
             >
                 <Column caption={'Предприятие'} dataField={'enterprise'} width={120}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
-                <Column caption={'Тип '} dataField={'typeSupport'}
+                <Column caption={'Тип '} dataField={'typeManager'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
-                <Column caption={'Ф.И.О.'} dataField={'nameEmployee'}
+                <Column caption={'Ф.И.О.'} dataField={'name'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Телефон'} dataField={'phone'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
             </DataGrid>
             </div>
         </div>
-
     );
 };
 
 
-export default TechnicalSupport;
+export default ManagerCompany;

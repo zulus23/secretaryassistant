@@ -19,10 +19,17 @@ class SearchController @Inject()(cc: ControllerComponents,repository:SearchRepos
     val result = repository.searchCompanyByName(searchRequest.searchValue)
      result.map(s => Ok(Json.toJson(s)))
   }
-  def loadDetail = Action.async(parse.json[DetailCompanyRequest]){ implicit request =>
+  def loadManager = Action.async(parse.json[DetailCompanyRequest]){ implicit request =>
 
     val detailCompanyRequest  = DetailCompanyRequest(request.body.codeCompany)
-    val result = repository.loadDetailByCompany(detailCompanyRequest.codeCompany)
+    val result = repository.loadManagerByCompany(detailCompanyRequest.codeCompany)
+    result.map(s => Ok(Json.toJson(s)))
+
+  }
+  def loadTechnicalSupport = Action.async(parse.json[DetailCompanyRequest]){ implicit request =>
+
+    val detailCompanyRequest  = DetailCompanyRequest(request.body.codeCompany)
+    val result = repository.loadTechnicalSupportByCompany(detailCompanyRequest.codeCompany)
     result.map(s => Ok(Json.toJson(s)))
 
   }

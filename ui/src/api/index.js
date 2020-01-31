@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios'
 
 const  client = axios.create();
@@ -13,23 +14,18 @@ let axiosConfig  =  () =>{
 };
 
 
-/*client.interceptors.response.use(function (response) {
-    // Do something with response data
-    return response;
-}, function (error) {
-    // Do something with response error
-    console.log('client.interceptors.response ---- ',error.response.data);
-    return Promise.reject(error);
-})*/
-
-
 export function searchCompanyByName(searchData) {
     return client.post('/api/searchrequest',searchData, axiosConfig()).catch(function (error)  {
         throw new Error(error.response.data.message.replace(/(["\"])/g,''));
     });
 }
-export function loadDetailRow(codeCompany) {
-    return client.post('/api/loadDetail',codeCompany, axiosConfig()).catch(function (error)  {
+export function loadManager(codeCompany) {
+    return client.post('/api/loadmanager',codeCompany, axiosConfig()).catch(function (error)  {
+        throw new Error(error.response.data.message.replace(/(["\"])/g,''));
+    });
+}
+export function loadTechnicalSupport(codeCompany) {
+    return client.post('/api/loadsupport',codeCompany, axiosConfig()).catch(function (error)  {
         throw new Error(error.response.data.message.replace(/(["\"])/g,''));
     });
 }

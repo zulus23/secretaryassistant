@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
 import {startSearch} from "../../redux/modules/search";
+import { TextBox } from 'devextreme-react';
+import './SearchField.css'
 
 
 const SearchField = () => {
@@ -8,9 +10,9 @@ const SearchField = () => {
     const searchDispach = useDispatch();
 
     const changeEventHandler = (e) => {
-        const data = e.target.value;
+        const data = e.value;
         console.log(data);
-        setSearchValue(e.target.value)
+        setSearchValue(data)
         const sendData = {
             searchValue:data,
             typeRequest:'company'
@@ -19,9 +21,10 @@ const SearchField = () => {
         searchDispach(startSearch(sendData));
     }
     return (
-        <div>
-           <input type='text' onChange={changeEventHandler} value={searchValue}/>
-        </div>
+
+            <TextBox className='gtk-search-field p-shadow' placeholder='Введите имя компании, сотрудника или номер телефона'
+                     showClearButton={true} onValueChanged={changeEventHandler} value={searchValue} valueChangeEvent='keyup'/>
+
     );
 };
 

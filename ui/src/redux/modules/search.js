@@ -4,7 +4,8 @@ import * as api from '../../api'
 export const GTK_START_SEARCH = 'GTK_START_SEARCH';
 export const GTK_END_SEARCH = 'GTK_END_SEARCH';
 export const GTK_SELECTED_ROW = 'GTK_SELECTED_ROW';
-export const GTK_FINISH_LOAD_DETAIL_SELECTED_ROW = 'GTK_FINISH_LOAD_DETAIL_SELECTED_ROW';
+export const GTK_FINISH_LOAD_MANAGER_SELECTED_ROW = 'GTK_FINISH_LOAD_MANAGER_SELECTED_ROW';
+export const GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW = 'GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW';
 
 
 
@@ -14,8 +15,8 @@ const initialState = {
     searchResult:[],
     error:[],
     searching : false,
-    detailResult:[]
-
+    managers:[],
+    supports:[],
 
 }
 
@@ -29,8 +30,11 @@ export default function reducer(state = initialState, action) {
        case GTK_END_SEARCH : {
            return {...state,searching: false, searchResult: action.payload}
        }
-       case GTK_FINISH_LOAD_DETAIL_SELECTED_ROW :{
-           return {...state,detailResult: action.payload}
+       case GTK_FINISH_LOAD_MANAGER_SELECTED_ROW :{
+           return {...state, managers: action.payload}
+       }
+       case GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW :{
+           return {...state, supports: action.payload}
        }
        default: {
            return state
@@ -57,8 +61,11 @@ function* searching(data) {
 function* loadDetailRow(data) {
     try{
        const codeCompany = data.payload;
-       const result = yield call(api.loadDetailRow,codeCompany);
-       yield put(finishLoadDetailRow(result.data))
+       const manager = yield call(api.loadManager,codeCompany);
+       const support = yield call(api.loadTechnicalSupport,codeCompany);
+       yield put(finishLoadManager(manager.data));
+        yield put(finishLoadSupport(support.data));
+
     }catch(e) {
 
     }
@@ -83,9 +90,15 @@ export function selectedSearchRow(data) {
         payload:data
     }
 }
-export function finishLoadDetailRow(data) {
+export function finishLoadManager(data) {
     return {
-        type:GTK_FINISH_LOAD_DETAIL_SELECTED_ROW,
+        type:GTK_FINISH_LOAD_MANAGER_SELECTED_ROW,
+        payload:data
+    }
+}
+export function finishLoadSupport(data) {
+    return {
+        type:GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW,
         payload:data
     }
 }

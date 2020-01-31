@@ -16,7 +16,6 @@ function App() {
         <div className="gtk-main-container">
 
             <div className='header'>
-                <h1>Поиск...</h1>
                 <SearchField/>
             </div>
             <div className='leftside'>

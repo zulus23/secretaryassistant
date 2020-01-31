@@ -1,26 +1,24 @@
 import React from 'react';
 import DataGrid, {
     Column,
-    ColumnChooser,
     ColumnFixing,
     FilterRow,
     GroupPanel,
     HeaderFilter,
-    MasterDetail,
     Pager,
-    Paging,
-    StateStoring,
-    Summary,
-    TotalItem
+    Paging
 } from 'devextreme-react/data-grid'
+import {LoadPanel} from 'devextreme-react/load-panel';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import './SearchResult.css'
 import {selectedSearchRow} from "../redux/modules/search";
 
+const position = {of: '#gridmain'};
 
 const SearchResult = (props) => {
     const resultSearchData = useSelector(state => state.search.searchResult, shallowEqual);
+    const isLoading = useSelector(state => state.search.searching, shallowEqual);
     const dispatchSelectRecord = useDispatch()
     const onSelectionChanged = ({selectedRowsData}) => {
         const data = selectedRowsData[0];
@@ -29,7 +27,7 @@ const SearchResult = (props) => {
     }
 
     return (
-        <div className='gtk_search_result_container'>
+        <div id={"gridmain"} className='gtk_search_result_container'>
             <DataGrid style={{height: '100%', width: '100%'}}
                       showColumnLines={true}
                       showRowLines={true}
@@ -42,7 +40,7 @@ const SearchResult = (props) => {
                       keyExpr={['code', 'seq']}
                       dataSource={resultSearchData}
                       onSelectionChanged={onSelectionChanged}
-                      showBorders={true}>
+                      >
                 />
                 <FilterRow visible={true}/>
                 <GroupPanel visible={true}/>
@@ -54,7 +52,7 @@ const SearchResult = (props) => {
                     showPageSizeSelector={true}
                     allowedPageSizes={[10, 20, 50]}
                     showInfo={true}/>
-                <Column caption={'Код компании'} dataField={'code'} width={80}
+                <Column caption={'Код'} dataField={'code'} width={80}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Головная компания'} dataField={'rootCompany'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
@@ -62,6 +60,17 @@ const SearchResult = (props) => {
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
 
             </DataGrid>
+
+            <LoadPanel
+                shadingColor={'rgba(0,0,0,0.4)'}
+                position={position}
+
+                visible={isLoading}
+                showIndicator={true}
+                shading={true}
+                showPane={true}
+
+            />
         </div>
     );
 };

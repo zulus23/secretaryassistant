@@ -1,7 +1,9 @@
-name := "secretaryassistant"
- 
-version := "1.0" 
-      
+import play.sbt.routes.RoutesKeys
+
+ThisBuild / name := "secretaryassistant"
+ThisBuild / version := "1.0"
+ThisBuild / scalaVersion := "2.13.1"
+
 lazy val `secretaryassistant` = (project in file(".")).enablePlugins(PlayScala,LauncherJarPlugin).settings(
   watchSources ++= (baseDirectory.value / "public/ui" ** "*").get
 )
@@ -10,7 +12,7 @@ resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
       
 resolvers += "Akka Snapshot Repository" at "https://repo.akka.io/snapshots/"
       
-scalaVersion := "2.13.1"
+
 
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice,
   "com.microsoft.sqlserver" % "mssql-jdbc" % "7.4.1.jre11",
