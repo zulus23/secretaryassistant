@@ -1,17 +1,33 @@
 :root{
-  font-size: 0.875em;
+  font-size: calc(1vm - 0.6em);
   box-sizing: border-box;
   margin: 0;
   /**/
 
+
+}
+
+@media (min-width: 50em) {
+  :root {
+    font-size:0.85em;
+  }
 }
 body {
   margin: inherit;
+
 }
 *,::before,::after {
   box-sizing: inherit;
 
 }
+/*TODO one for all or ???*/
+.gtk-shadow {
+  border-radius: 0;
+  box-shadow: 0 0.3em 0.4em rgba(0,0,0,0.45);
+}
+
+
+
 
 @font-face {
   font-family: 'Montserrat';

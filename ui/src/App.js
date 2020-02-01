@@ -7,6 +7,7 @@ import ruMessages from 'devextreme/localization/messages/ru.json';
 import 'devextreme-intl';
 import {loadMessages, locale} from 'devextreme/localization';
 import DetailContainer from "./components/DetailContainer";
+import HeaderContainer from "./components/HeaderContainer";
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         <div className="gtk-main-container">
 
             <div className='header'>
-                <SearchField/>
+               <HeaderContainer/>
             </div>
             <div className='leftside'>
                 <SearchResult/>

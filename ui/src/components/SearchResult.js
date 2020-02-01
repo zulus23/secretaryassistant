@@ -13,6 +13,7 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import './SearchResult.css'
 import {selectedSearchRow} from "../redux/modules/search";
+import HeaderSection from "./common/HeaderSection";
 
 const position = {of: '#gridmain'};
 
@@ -27,8 +28,10 @@ const SearchResult = (props) => {
     }
 
     return (
-        <div id={"gridmain"} className='gtk_search_result_container'>
-            <DataGrid style={{height: '100%', width: '100%'}}
+        <div id={"gridmain"} className='gtk-search-result-container'>
+            <HeaderSection>Клиенты</HeaderSection>
+            <div className='gtk-search-result-grid-container'>
+            <DataGrid className='gtk-search-result-grid gtk-search-result-shadow'
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}
@@ -60,7 +63,7 @@ const SearchResult = (props) => {
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
 
             </DataGrid>
-
+            </div>
             <LoadPanel
                 shadingColor={'rgba(0,0,0,0.4)'}
                 position={position}

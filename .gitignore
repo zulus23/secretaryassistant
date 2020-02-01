@@ -16,3 +16,4 @@ dist
 /null
 /conf/application.conf
 /public/
+/node_modules

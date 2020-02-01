@@ -12,6 +12,7 @@ import DataGrid, {
     Pager,
     Paging
 } from 'devextreme-react/data-grid'
+import HeaderSection from "../common/HeaderSection";
 
 const ManagerCompany = (props) => {
     const managerLoad = useSelector(state => state.search.managers, shallowEqual);
@@ -21,9 +22,9 @@ const ManagerCompany = (props) => {
     });
     return (
         <div className='gtk-manager-list-container'>
-            <p className='gtk-list-manager-header'>Ответственные менеджеры</p>
+            <HeaderSection>Ответственные менеджеры</HeaderSection>
             <div className='gtk-manager-grid-container'>
-            <DataGrid dataSource={dataSource} className='gtk-manager-grid'
+            <DataGrid dataSource={dataSource} className='gtk-manager-grid gtk-manager-shadow'
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}

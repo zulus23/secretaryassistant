@@ -1,10 +1,29 @@
-.gtk_search_result_container {
-    margin: 0 auto;
+.gtk-search-result-container {
+    /*margin: 0 auto;*/
     height: 100%;
     min-height: 100%;
     position: absolute;
     width: 100%;
+
 }
+.gtk-search-result-grid-container {
+    height: calc(100% - 20px);
+    width: 100%;
+    position: relative;
+}
+.gtk-search-result-grid {
+    /*height: calc(100% - 20px);*/
+    height: inherit;
+    margin-left: 10px;
+}
+.gtk-search-result-shadow {
+    border-radius: 0;
+    box-shadow: 0 0.3em 0.4em rgba(0, 0, 0, 0.45);
+}
+
+
+
+
 .dx-datagrid-headers {
     white-space: normal;
 }

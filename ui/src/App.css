@@ -1,7 +1,7 @@
 .gtk-main-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 1fr 50px;
+  grid-template-rows: 100px 1fr 20px;
   grid-template-areas:
           'header header'
           'left right '
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  background-color: #648ca6;
+  background-color: #B33962;
 }
 .leftside {
   grid-area: left;

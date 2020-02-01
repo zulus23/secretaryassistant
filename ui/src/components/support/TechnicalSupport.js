@@ -4,6 +4,7 @@ import ArrayStore from "devextreme/data/array_store";
 import './TechnicalSupport.css'
 
 import DataGrid, {Column, HeaderFilter} from "devextreme-react/data-grid";
+import HeaderSection from "../common/HeaderSection";
 
 const TechnicalSupport = (props) => {
     const supportLoad = useSelector(state => state.search.supports, shallowEqual);
@@ -14,9 +15,9 @@ const TechnicalSupport = (props) => {
     return (
 
         <div className='gtk-support-list-container'>
-            <p className='gtk-list-support-header'>Техническая поддержка</p>
+            <HeaderSection>Техническая поддержка</HeaderSection>
             <div className='gtk-support-grid-container'>
-            <DataGrid dataSource={dataSource} className='gtk-support-grid'
+            <DataGrid dataSource={dataSource} className='gtk-support-grid gtk-support-shadow'
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}

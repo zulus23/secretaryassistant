@@ -12,12 +12,11 @@
 
 .gtk_grid_support_container {
     grid-area: suptech;
-    background-color: #3d8b3d;
     position: relative;
 }
 .gtk_grid_manager_container{
     grid-area: manager;
-    background-color: cyan;
+
     position: relative;
 }
 .gtk_grid_address_container {
