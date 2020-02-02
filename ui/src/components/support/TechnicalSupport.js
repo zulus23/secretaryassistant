@@ -5,16 +5,23 @@ import './TechnicalSupport.css'
 
 import DataGrid, {Column, HeaderFilter} from "devextreme-react/data-grid";
 import HeaderSection from "../common/HeaderSection";
+import {LoadPanel} from "devextreme-react/load-panel";
+
+
+const position = {of: '#supportGrid'};
 
 const TechnicalSupport = (props) => {
     const supportLoad = useSelector(state => state.search.supports, shallowEqual);
+
+    const isLoading = useSelector(state => state.search.loadingSupport, shallowEqual);
+
     const dataSource = new ArrayStore({
         key: ['enterprise', 'nameEmployee'],
         data: supportLoad
     });
     return (
 
-        <div className='gtk-support-list-container'>
+        <div id='supportGrid' className='gtk-support-list-container'>
             <HeaderSection>Техническая поддержка</HeaderSection>
             <div className='gtk-support-grid-container'>
             <DataGrid dataSource={dataSource} className='gtk-support-grid gtk-support-shadow'
@@ -32,6 +39,16 @@ const TechnicalSupport = (props) => {
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
             </DataGrid>
             </div>
+            <LoadPanel
+                shadingColor={'rgba(0,0,0,0.4)'}
+                position={position}
+
+                visible={isLoading}
+                showIndicator={true}
+                shading={true}
+                showPane={true}
+
+            />
         </div>
 
     );

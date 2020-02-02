@@ -13,15 +13,19 @@ import DataGrid, {
     Paging
 } from 'devextreme-react/data-grid'
 import HeaderSection from "../common/HeaderSection";
+import {LoadPanel} from "devextreme-react/load-panel";
+
+const position = {of: '#managerGrid'};
 
 const ManagerCompany = (props) => {
     const managerLoad = useSelector(state => state.search.managers, shallowEqual);
+    const isLoading = useSelector(state => state.search.loadingManager, shallowEqual);
     const dataSource = new ArrayStore({
         key: ['enterprise','name'],
         data: managerLoad
     });
     return (
-        <div className='gtk-manager-list-container'>
+        <div id={"managerGrid"} className='gtk-manager-list-container'>
             <HeaderSection>Ответственные менеджеры</HeaderSection>
             <div className='gtk-manager-grid-container'>
             <DataGrid dataSource={dataSource} className='gtk-manager-grid gtk-manager-shadow'
@@ -39,6 +43,16 @@ const ManagerCompany = (props) => {
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
             </DataGrid>
             </div>
+            <LoadPanel
+                shadingColor={'rgba(0,0,0,0.4)'}
+                position={position}
+
+                visible={isLoading}
+                showIndicator={true}
+                shading={true}
+                showPane={true}
+
+            />
         </div>
     );
 };

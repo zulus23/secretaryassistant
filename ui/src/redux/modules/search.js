@@ -6,7 +6,7 @@ export const GTK_END_SEARCH = 'GTK_END_SEARCH';
 export const GTK_SELECTED_ROW = 'GTK_SELECTED_ROW';
 export const GTK_FINISH_LOAD_MANAGER_SELECTED_ROW = 'GTK_FINISH_LOAD_MANAGER_SELECTED_ROW';
 export const GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW = 'GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW';
-
+export const GTK_START_LOAD_DETAIL = 'GTK_START_LOAD_DETAIL';
 
 
 
@@ -15,6 +15,9 @@ const initialState = {
     searchResult:[],
     error:[],
     searching : false,
+    loadingManager: false,
+    loadingSupport: false,
+    searchingPhone: false,
     managers:[],
     supports:[],
 
@@ -30,11 +33,15 @@ export default function reducer(state = initialState, action) {
        case GTK_END_SEARCH : {
            return {...state,searching: false, searchResult: action.payload}
        }
+       case GTK_START_LOAD_DETAIL : {
+           return {...state,loadingManager:true,loadingSupport:true}
+       }
+
        case GTK_FINISH_LOAD_MANAGER_SELECTED_ROW :{
-           return {...state, managers: action.payload}
+           return {...state, managers: action.payload,loadingManager:false}
        }
        case GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW :{
-           return {...state, supports: action.payload}
+           return {...state, supports: action.payload,loadingSupport:false}
        }
        default: {
            return state
@@ -51,8 +58,7 @@ function* searching(data) {
    try {
        const searchRequest = data.payload;
        const result = yield call(api.searchCompanyByName,searchRequest);
-       console.log(searchRequest);
-       console.log(result);
+
        yield put(finishSearch(result.data));
    }catch (e) {
 
@@ -60,16 +66,24 @@ function* searching(data) {
 }
 function* loadDetailRow(data) {
     try{
+       yield put(startLoadDetail());
        const codeCompany = data.payload;
        const manager = yield call(api.loadManager,codeCompany);
        const support = yield call(api.loadTechnicalSupport,codeCompany);
        yield put(finishLoadManager(manager.data));
-        yield put(finishLoadSupport(support.data));
+       yield put(finishLoadSupport(support.data));
 
     }catch(e) {
 
     }
 }
+export function startLoadDetail() {
+    return {
+        type:GTK_START_LOAD_DETAIL
+
+    }
+}
+
 
 
 export function startSearch(data) {
