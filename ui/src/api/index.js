@@ -29,3 +29,8 @@ export function loadTechnicalSupport(codeCompany) {
         throw new Error(error.response.data.message.replace(/(["\"])/g,''));
     });
 }
+export function searchPhoneByCodeAndName(searchData) {
+    return client.post('/api/searchphone',searchData, axiosConfig()).catch(function (error)  {
+        throw new Error(error.response.data.message.replace(/(["\"])/g,''));
+    });
+}

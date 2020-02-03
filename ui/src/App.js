@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css'
-import SearchField from "./components/search/SearchField";
-import SearchResult from "./components/SearchResult";
 
 import ruMessages from 'devextreme/localization/messages/ru.json';
 import 'devextreme-intl';
 import {loadMessages, locale} from 'devextreme/localization';
 import DetailContainer from "./components/DetailContainer";
 import HeaderContainer from "./components/HeaderContainer";
+import LeftSideContainer from "./components/LeftSideContainer";
 
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
                <HeaderContainer/>
             </div>
             <div className='leftside'>
-                <SearchResult/>
+                <LeftSideContainer/>
             </div>
             <div className='rightside'>
                 <DetailContainer/>

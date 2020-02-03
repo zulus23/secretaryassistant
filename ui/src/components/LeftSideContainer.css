@@ -1,21 +1,19 @@
-.gtk_detail_container {
+.gtk-left-side-container {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-            'manager'
-            'suptech';
-
+            'company'
+            'phone';
     grid-row-gap: 10px;
 }
 
-.gtk_grid_support_container {
-    grid-area: suptech;
+.gtk-grid-left-side-company {
+    grid-area: company;
     position: relative;
 }
-.gtk_grid_manager_container{
-    grid-area: manager;
-
+.gtk-grid-left-side-phone{
+    grid-area: phone;
     position: relative;
 }

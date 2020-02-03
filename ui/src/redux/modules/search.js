@@ -7,6 +7,7 @@ export const GTK_SELECTED_ROW = 'GTK_SELECTED_ROW';
 export const GTK_FINISH_LOAD_MANAGER_SELECTED_ROW = 'GTK_FINISH_LOAD_MANAGER_SELECTED_ROW';
 export const GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW = 'GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW';
 export const GTK_START_LOAD_DETAIL = 'GTK_START_LOAD_DETAIL';
+export const GTK_FINISH_SEARCH_PHONE = 'GTK_FINISH_SEARCH_PHONE';
 
 
 
@@ -20,6 +21,7 @@ const initialState = {
     searchingPhone: false,
     managers:[],
     supports:[],
+    phones:[]
 
 }
 
@@ -28,10 +30,11 @@ const initialState = {
 export default function reducer(state = initialState, action) {
    switch (action.type) {
        case GTK_START_SEARCH : {
-           return {...state,searching: true}
+           return {...state,searching: true,searchingPhone: true}
        }
        case GTK_END_SEARCH : {
-           return {...state,searching: false, searchResult: action.payload}
+
+           return {...state,searching: false, searchingPhone: false, searchResult: action.payload}
        }
        case GTK_START_LOAD_DETAIL : {
            return {...state,loadingManager:true,loadingSupport:true}
@@ -42,6 +45,10 @@ export default function reducer(state = initialState, action) {
        }
        case GTK_FINISH_LOAD_SUPPORT_SELECTED_ROW :{
            return {...state, supports: action.payload,loadingSupport:false}
+       }
+       case GTK_FINISH_SEARCH_PHONE :{
+
+           return {...state,phones: action.payload,searchingPhone: false}
        }
        default: {
            return state
@@ -58,8 +65,9 @@ function* searching(data) {
    try {
        const searchRequest = data.payload;
        const result = yield call(api.searchCompanyByName,searchRequest);
-
+       const resultPhone = yield call(api.searchPhoneByCodeAndName,searchRequest);
        yield put(finishSearch(result.data));
+       yield put(finishSearchPhone(resultPhone.data));
    }catch (e) {
 
    }
@@ -116,3 +124,10 @@ export function finishLoadSupport(data) {
         payload:data
     }
 }
+export function  finishSearchPhone(data) {
+    return {
+        type:GTK_FINISH_SEARCH_PHONE,
+        payload:data
+    }
+}
+

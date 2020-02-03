@@ -12,7 +12,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class SearchPhoneRepository @Inject()(@play.db.NamedDatabase(value = "phonedb") _dbConfigProvider:DatabaseConfigProvider)
                                     (implicit ex :ExecutionContext)  extends HasDatabaseConfigProvider[JdbcProfile]{
-  override protected val dbConfigProvider: DatabaseConfigProvider = _dbConfigProvider
+    override protected val dbConfigProvider: DatabaseConfigProvider = _dbConfigProvider
   implicit  val getResult = GetResult(r => Phone(r.nextString,r.nextString,r.nextString,r.nextString,
                                                  r.nextString,r.nextString,r.nextString,r.nextString,
                                                  r.nextString,r.nextString,r.nextString))

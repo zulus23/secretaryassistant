@@ -28,6 +28,7 @@ const TechnicalSupport = (props) => {
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}
+
             >
                 <Column caption={'Предприятие'} dataField={'enterprise'} width={120}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>

@@ -11,6 +11,7 @@ import scala.concurrent.ExecutionContext
 @Singleton
 class SearchPhoneController @Inject()(cc: ControllerComponents,repository:SearchPhoneRepository)
                                      (implicit ex: ExecutionContext) extends AbstractController(cc) {
+  import repository._
   import models.ImplicityFormat._
 
   def searchPhone = Action.async(parse.json[SearchRequest]) { implicit  request =>
