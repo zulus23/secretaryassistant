@@ -1,4 +1,4 @@
 package models
 
-case class Phone(enterprise: String,department: String,position: String,fio: String,innerPhone: String,
-                 outerPhone1: String, outerPhone2: String,email: String,skype: String,cab: String)
+case class Phone(enterprise: String,enterpriseAddress: String, chief: String,department: String,position: String,fio: String,innerPhone: String,
+                 outerPhone: String,email: String,skype: String,cab: String)
