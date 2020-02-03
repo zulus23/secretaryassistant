@@ -9,13 +9,16 @@ import HeaderContainer from "./components/HeaderContainer";
 import LeftSideContainer from "./components/LeftSideContainer";
 
 
+
+
 function App() {
     loadMessages(ruMessages);
     locale('ru');
-    return (
-        <div className="gtk-main-container">
 
-            <div className='header'>
+    return (
+        <div   className="gtk-main-container">
+
+            <div id={'notify'} className='header'>
                <HeaderContainer/>
             </div>
             <div className='leftside'>

@@ -2,15 +2,7 @@ import React from 'react';
 import './SearchPhoneResult.css'
 import {shallowEqual, useSelector} from "react-redux";
 import HeaderSection from "../common/HeaderSection";
-import DataGrid, {
-    Column,
-    ColumnFixing,
-    FilterRow,
-    GroupPanel,
-    HeaderFilter,
-    Pager,
-    Paging
-} from "devextreme-react/data-grid";
+import DataGrid, {Column, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Pager} from "devextreme-react/data-grid";
 import {LoadPanel} from "devextreme-react/load-panel";
 
 const position = {of: '#gridPhone'};
@@ -29,7 +21,7 @@ const SearchPhoneResult = () => {
                           allowColumnReordering={true}
                           allowColumnResizing={true}
                           columnAutoWidth={true}
-                          //selection={{mode: 'single'}}
+                          selection={{mode: 'single'}}
                           //columnResizingMode={'widget'}
                           keyExpr={['fio']}
                           dataSource={resultSearchData}
@@ -48,10 +40,10 @@ const SearchPhoneResult = () => {
                         showInfo={true}/>
                     <Column caption={'Предприятие'} dataField={'enterprise'} width={80}
                             alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
-                    <Column caption={'Адрес'} dataField={'enterpriseAddress'}
+                    {/*<Column caption={'Адрес'} dataField={'enterpriseAddress'}
                             alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                     <Column caption={'Руководитель'} dataField={'chief'}
-                            alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
+                            alignment={'center'}><HeaderFilter allowSearch={true}/></Column>*/}
                     <Column caption={'Подразделение'} dataField={'department'}
                             alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                     <Column caption={'Должность'} dataField={'position'}

@@ -31,6 +31,7 @@ export function loadTechnicalSupport(codeCompany) {
 }
 export function searchPhoneByCodeAndName(searchData) {
     return client.post('/api/searchphone',searchData, axiosConfig()).catch(function (error)  {
-        throw new Error(error.response.data.message.replace(/(["\"])/g,''));
+        console.log("searchPhoneByCodeAndName " ,error);
+        throw new Error(error);
     });
 }

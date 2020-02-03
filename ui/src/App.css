@@ -1,7 +1,7 @@
 .gtk-main-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 1fr 20px;
+  grid-template-rows: 100px 1fr 10px;
   grid-template-areas:
           'header header'
           'left right '
@@ -32,9 +32,10 @@
 }
 .footer {
   grid-area: footer;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background-color: #648ca6;
+  background-color: #B33962;
 }

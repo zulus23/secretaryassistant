@@ -3,15 +3,7 @@ import {shallowEqual, useSelector} from "react-redux";
 
 import ArrayStore from 'devextreme/data/array_store';
 import './ManagerCompany.css'
-import DataGrid, {
-    Column,
-    ColumnFixing,
-    FilterRow,
-    GroupPanel,
-    HeaderFilter,
-    Pager,
-    Paging
-} from 'devextreme-react/data-grid'
+import DataGrid, {Column, HeaderFilter} from 'devextreme-react/data-grid'
 import HeaderSection from "../common/HeaderSection";
 import {LoadPanel} from "devextreme-react/load-panel";
 
