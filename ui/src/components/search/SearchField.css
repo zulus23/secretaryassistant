@@ -4,9 +4,17 @@
     font-family: Montserrat,'DejaVu Sans', Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 1.25em;
+    text-align: center;
 
 }
 .p-shadow {
     border-radius: 0;
     box-shadow: 0 0.3em 0.4em rgba(0,0,0,0.45);
+}
+.dx-placeholder {
+    text-align: center;
+    width: 100%;
+}
+.dx-texteditor-input-container input {
+    text-align: center;
 }
