@@ -12,7 +12,7 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class SearchController @Inject()(cc: ControllerComponents,repository:SearchRepository)(implicit ex: ExecutionContext) extends AbstractController(cc) {
    import repository._
-   import models.ImplicityFormat._
+   import models.ImplicitFormat._
 
   def search = Action.async(parse.json[SearchRequest]) { implicit  request =>
     val searchRequest = SearchRequest(request.body.searchValue,request.body.typeRequest)

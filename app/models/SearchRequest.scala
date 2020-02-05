@@ -30,7 +30,7 @@ object EnumUtils {
 }
 
 
-object ImplicityFormat {
+object ImplicitFormat {
 
   implicit val formatSearchRequestJson = Json.format[SearchRequest]
   implicit val formatDetailRequestJson = Json.format[DetailCompanyRequest]

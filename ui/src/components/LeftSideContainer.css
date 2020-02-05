@@ -2,18 +2,14 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas:
-            'company'
-            'phone';
+    grid-template-rows: 1fr;
+    grid-template-areas:  'leftside';
+
     grid-row-gap: 10px;
 }
 
 .gtk-grid-left-side-company {
-    grid-area: company;
+    grid-area: leftside;
     position: relative;
 }
-.gtk-grid-left-side-phone{
-    grid-area: phone;
-    position: relative;
-}
+
