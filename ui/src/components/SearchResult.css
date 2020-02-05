@@ -7,7 +7,7 @@
 
 }
 .gtk-search-result-grid-container {
-    height: calc(100% - 0.95em);
+    height: calc(100% - 0.14em);
     width: 100%;
     position: relative;
 }
@@ -18,7 +18,7 @@
 }
 .gtk-search-result-shadow {
     border-radius: 0;
-    box-shadow: 0 0.3em 0.4em rgba(0, 0, 0, 0.45);
+    box-shadow: 0 0.1em 0.2em rgba(0, 0, 0, 0.45);
 }
 
 

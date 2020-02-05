@@ -1,7 +1,6 @@
 /* eslint-disable */
-
 :root{
-  font-size: calc( 1vm - 0.6em);
+  font-size: calc(1vw - 0.6em);
   /*font-size:0.85em;*/
   box-sizing: border-box;
   margin: 0;

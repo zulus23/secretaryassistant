@@ -1,19 +1,10 @@
 import React from 'react';
-import DataGrid, {
-    Column,
-    ColumnFixing,
-    FilterRow,
-    GroupPanel,
-    HeaderFilter,
-    Pager,
-    Paging
-} from 'devextreme-react/data-grid'
+import DataGrid, {Column, ColumnFixing, FilterRow, GroupPanel, HeaderFilter} from 'devextreme-react/data-grid'
 import {LoadPanel} from 'devextreme-react/load-panel';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import './SearchResult.css'
 import {selectedSearchRow} from "../redux/modules/search";
-import HeaderSection from "./common/HeaderSection";
 
 const position = {of: '#gridmain'};
 
@@ -29,7 +20,7 @@ const SearchResult = (props) => {
 
     return (
         <div id={"gridmain"} className='gtk-search-result-container'>
-            <HeaderSection>Клиенты</HeaderSection>
+          {/*  <HeaderSection>Клиенты</HeaderSection>*/}
             <div className='gtk-search-result-grid-container'>
             <DataGrid className='gtk-search-result-grid gtk-search-result-shadow'
                       showColumnLines={true}
@@ -50,11 +41,11 @@ const SearchResult = (props) => {
                 <HeaderFilter visible={true}/>
                 {/*  <ColumnChooser enabled={true} mode={'select'} width={300} height={400}/>*/}
                 <ColumnFixing enabled={true}/>
-                <Paging defaultPageSize={10}/>
+                {/*<Paging defaultPageSize={10}/>
                 <Pager
                     showPageSizeSelector={true}
                     allowedPageSizes={[10, 20, 50]}
-                    showInfo={true}/>
+                    showInfo={true}/>*/}
                 <Column caption={'Код'} dataField={'code'} width={80}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Головная компания'} dataField={'rootCompany'}

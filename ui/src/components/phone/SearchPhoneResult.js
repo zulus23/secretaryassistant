@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchPhoneResult.css'
 import {shallowEqual, useSelector} from "react-redux";
-import HeaderSection from "../common/HeaderSection";
+
 import DataGrid, {Column, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Pager} from "devextreme-react/data-grid";
 import {LoadPanel} from "devextreme-react/load-panel";
 
@@ -12,7 +12,7 @@ const SearchPhoneResult = () => {
     const isLoading = useSelector(state => state.search.searchingPhone, shallowEqual);
     return (
         <div id={"gridPhone"} className='gtk-phone-list-container'>
-            <HeaderSection>Телефоны</HeaderSection>
+           {/* <HeaderSection>Телефоны</HeaderSection>*/}
             <div className='gtk-phone-grid-container'>
                 <DataGrid className='gtk-phone-grid gtk-phone-shadow'
                           showColumnLines={true}

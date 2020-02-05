@@ -9,7 +9,11 @@
 }
 
 .gtk-grid-left-side-company {
+    height: 100%;
     grid-area: leftside;
     position: relative;
 }
 
+.gtk-tab-panel {
+height: calc(100vh - 159px);
+}
