@@ -7,18 +7,17 @@ import './SearchField.css'
 
 const SearchField = () => {
     const [searchValue,setSearchValue] = useState("")
-    const searchDispach = useDispatch();
+    const searchDispatch = useDispatch();
 
     const changeEventHandler = (e) => {
         const data = e.value;
-        console.log(data);
         setSearchValue(data)
         const sendData = {
             searchValue:data,
             typeRequest:'company'
         }
         if(data.length > 3)
-        searchDispach(startSearch(sendData));
+        searchDispatch(startSearch(sendData));
     }
     return (
 
