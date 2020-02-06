@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import DataGrid, {Column, ColumnFixing, FilterRow, GroupPanel, HeaderFilter} from 'devextreme-react/data-grid'
-import {LoadPanel} from 'devextreme-react/load-panel';
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 
 import './SearchResult.css'
 import {selectedSearchRow} from "../redux/modules/search";
 
-const position = {of: '#gridmain'};
 
 const SearchResult = (props) => {
     const resultSearchData = useSelector(state => state.search.searchResult, shallowEqual);
     const isLoading = useSelector(state => state.search.searching, shallowEqual);
+    const gridRef = React.createRef();
+    useEffect(() => {
+        if(isLoading) {
+            gridRef.current.instance.beginCustomLoading();
+        }
+        else gridRef.current.instance.endCustomLoading();
+    },[isLoading,gridRef]);
+
     const dispatchSelectRecord = useDispatch()
     const onSelectionChanged = ({selectedRowsData}) => {
         const data = selectedRowsData[0];
@@ -18,11 +24,14 @@ const SearchResult = (props) => {
 
     }
 
+
+
+
     return (
         <div id={"gridmain"} className='gtk-search-result-container'>
           {/*  <HeaderSection>Клиенты</HeaderSection>*/}
             <div className='gtk-search-result-grid-container'>
-            <DataGrid className='gtk-search-result-grid gtk-search-result-shadow'
+            <DataGrid ref={gridRef} className='gtk-search-result-grid gtk-search-result-shadow'
                       showColumnLines={true}
                       showRowLines={true}
                       showBorders={true}
@@ -55,16 +64,7 @@ const SearchResult = (props) => {
 
             </DataGrid>
             </div>
-            <LoadPanel
-                shadingColor={'rgba(0,0,0,0.4)'}
-                position={position}
 
-                visible={isLoading}
-                showIndicator={true}
-                shading={true}
-                showPane={true}
-
-            />
         </div>
     );
 };

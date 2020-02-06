@@ -1,20 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './SearchPhoneResult.css'
 import {shallowEqual, useSelector} from "react-redux";
 
 import DataGrid, {Column, ColumnFixing, FilterRow, GroupPanel, HeaderFilter, Pager} from "devextreme-react/data-grid";
-import {LoadPanel} from "devextreme-react/load-panel";
 
-const position = {of: '#gridPhone'};
 
 const SearchPhoneResult = () => {
     const resultSearchData = useSelector(state => state.search.phones, shallowEqual);
     const isLoading = useSelector(state => state.search.searchingPhone, shallowEqual);
+    const gridRef = React.createRef();
+    useEffect(() => {
+        if(isLoading) {
+            gridRef.current.instance.beginCustomLoading();
+        }
+        else gridRef.current.instance.endCustomLoading();
+    },[isLoading,gridRef]);
+
+
     return (
-        <div id={"gridPhone"} className='gtk-phone-list-container'>
+        <div  className='gtk-phone-list-container'>
            {/* <HeaderSection>Телефоны</HeaderSection>*/}
             <div className='gtk-phone-grid-container'>
-                <DataGrid className='gtk-phone-grid gtk-phone-shadow'
+                <DataGrid ref={gridRef} className='gtk-phone-grid gtk-phone-shadow'
                           showColumnLines={true}
                           showRowLines={true}
                           showBorders={true}
@@ -60,16 +67,7 @@ const SearchPhoneResult = () => {
                             alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 </DataGrid>
             </div>
-            <LoadPanel
-                shadingColor={'rgba(0,0,0,0.4)'}
-                position={position}
 
-                visible={isLoading}
-                showIndicator={true}
-                shading={true}
-                showPane={true}
-
-            />
         </div>
     );
 };
