@@ -33,12 +33,16 @@ const ManagerCompany = (props) => {
             >
                 <Column caption={'Предприятие'} dataField={'enterprise'} width={120}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
+                <Column caption={'Офис'} dataField={'department'} width={100}
+                        alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Тип '} dataField={'typeManager'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Ф.И.О.'} dataField={'name'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
-                <Column caption={'Телефон'} dataField={'phone'}
+                <Column caption={'Моб. телефон'} dataField={'mobphone'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
+                <Column caption={'Телефон'} dataField={'phone'}
+                    alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
             </DataGrid>
             </div>
 

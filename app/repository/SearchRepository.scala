@@ -16,7 +16,7 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
   implicit  val getResult = GetResult(r => Company(r.nextString,r.nextString,r.nextInt,r.nextString))
   implicit  val companyToJson = Json.writes[Company]
 
-  implicit  val getResultManager = GetResult(r => ManagerCompany(r.nextString,r.nextString,r.nextString,r.nextString))
+  implicit  val getResultManager = GetResult(r => ManagerCompany(r.nextString,r.nextString,r.nextString,r.nextString,r.nextString,r.nextString))
   implicit  val managerToJson = Json.writes[ManagerCompany]
 
   implicit  val getResultSupport = GetResult(r => Support(r.nextString,r.nextString,r.nextString,r.nextString))
@@ -29,7 +29,7 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
       val result =
         sql""" select rootC.nameRootCompany as rootCompany,g.cust_num as code, g.cust_seq as seq, g.name as name from sl_gotek.dbo.custaddr g
                 OUTER APPLY  (SELECT a.name AS nameRootCompany FROM SL_gotek.dbo.custaddr a WHERE a.cust_num = g.cust_num AND a.cust_seq = 0) AS rootC
-             where g.cust_num not in ('K005404','K000827','K000828','K001813','K000029','K000358', 'K005078') and isnull(g.uf_prochrealiz,0) = 0 and  g.name like '%#$searchValue%'
+             where g.cust_num not in ('K005404','K000827','K000828','K001813','K000029','K000358', 'K005078','K001800') and isnull(g.uf_prochrealiz,0) = 0 and  g.name like '%#$searchValue%'
              order by g.cust_num """.as[Company]
       result
   })
@@ -51,17 +51,17 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
       val result = sql""" WITH manager(enterprise,type_,name,phone) AS
                         |(
                         |
-                        |SELECT '#$enterprise', 'Бэк',e1.name, e1.phone FROM #$dbName.dbo.customer c
+                        |SELECT '#$enterprise',e1.dept as department,e1.uf_mobphone as mobphone, 'Бэк',e1.name, e1.phone FROM #$dbName.dbo.customer c
                         |JOIN #$dbName..slsman s1  ON c.slsman = s1.slsman
                         |JOIN #$dbName..employee e1  ON s1.ref_num = e1.emp_num
                         |WHERE c.cust_num = '#$codeCompany' AND c.cust_seq = 0
                         |UNION ALL
-                        |SELECT '#$enterprise','Фронт',e1.name, e1.phone FROM #$dbName.dbo.customer c
+                        |SELECT '#$enterprise',e1.dept as department,e1.uf_mobphone as mobphone,'Фронт',e1.name, e1.phone FROM #$dbName.dbo.customer c
                         |JOIN   #$dbName..slsman s1  ON c.uf_slsmanfront = s1.slsman
                         |JOIN #$dbName..employee e1  ON s1.ref_num = e1.emp_num
                         |WHERE c.cust_num = '#$codeCompany' AND c.cust_seq = 0
                         |UNION ALL
-                        |SELECT '#$enterprise','Кам',e1.name, e1.phone FROM #$dbName.dbo.customer c
+                        |SELECT '#$enterprise',e1.dept as department,e1.uf_mobphone as mobphone,'Кам',e1.name, e1.phone FROM #$dbName.dbo.customer c
                         |JOIN   #$dbName..slsman s1  ON c.uf_strategmanager = s1.slsman
                         |JOIN #$dbName..employee e1  ON s1.ref_num = e1.emp_num
                         |WHERE c.cust_num = '#$codeCompany' AND c.cust_seq = 0
