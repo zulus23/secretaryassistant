@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import './LeftSideContainer.css'
+import './MainSideContainer.css'
 import SearchResult from "./SearchResult";
 import SearchPhoneResult from "./phone/SearchPhoneResult";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';
 import HeaderSection from "./common/HeaderSection";
+import DetailContainer from "./DetailContainer";
 
 
-const LeftSideContainer = () => {
+const MainSideContainer = () => {
     const [tabIndex,setTabIndex] = useState(0)
     return (
         <div className='gtk-left-side-container'>
@@ -19,7 +20,8 @@ const LeftSideContainer = () => {
 
             <TabPanel  className={tabIndex === 0 ? 'gtk-tab-panel':''}>
                 <div className='gtk-grid-left-side-company'>
-                  <SearchResult/>
+                  {/*<SearchResult/>*/}
+                  <DetailContainer/>
                 </div>
             </TabPanel>
             <TabPanel  className={tabIndex === 1 ? 'gtk-tab-panel':''}>
@@ -38,4 +40,4 @@ const LeftSideContainer = () => {
     );
 };
 
-export default LeftSideContainer;
+export default MainSideContainer;

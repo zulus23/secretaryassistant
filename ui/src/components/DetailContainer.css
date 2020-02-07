@@ -1,20 +1,24 @@
-.gtk_detail_container {
+.gtk-detail-container {
     height: 100%;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
-            'manager'
-            'suptech';
+            'result manager'
+            'result suptech';
 
     grid-row-gap: 10px;
 }
+.gtk-grid-result-container {
+    grid-area: result;
+    position: relative;
+}
 
-.gtk_grid_support_container {
+.gtk-grid-support-container {
     grid-area: suptech;
     position: relative;
 }
-.gtk_grid_manager_container{
+.gtk-grid-manager-container{
     grid-area: manager;
 
     position: relative;

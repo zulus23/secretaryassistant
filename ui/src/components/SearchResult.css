@@ -7,9 +7,10 @@
 
 }
 .gtk-search-result-grid-container {
-    height: calc(100% - 0.14em);
+    height: calc(100% - 0.22em);
     width: 100%;
     position: relative;
+    padding-right: 10px;
 }
 .gtk-search-result-grid {
     /*height: calc(100% - 20px);*/

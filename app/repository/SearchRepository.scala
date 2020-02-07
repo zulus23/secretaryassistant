@@ -48,7 +48,7 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
 
   val loadManager = (enterprise: String,dbName:String, codeCompany:String) => {
     db.run({
-      val result = sql""" WITH manager(enterprise,type_,name,phone) AS
+      val result = sql""" WITH manager(enterprise,department,mobphone,type_,name,phone) AS
                         |(
                         |
                         |SELECT '#$enterprise',e1.dept as department,e1.uf_mobphone as mobphone, 'Бэк',e1.name, e1.phone FROM #$dbName.dbo.customer c

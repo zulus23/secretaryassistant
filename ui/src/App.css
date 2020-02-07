@@ -1,11 +1,15 @@
 .gtk-main-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr ;
   grid-template-rows: 100px 1fr 10px;
-  grid-template-areas:
+  /*grid-template-areas:
           'header header'
           'left right '
-          'footer footer';
+          'footer footer';*/
+  grid-template-areas:
+          'header'
+          'main'
+          'footer';
   height: 100vh;
   grid-column-gap: 10px;
 
@@ -30,6 +34,11 @@
   /*background-color: #8fd4d9;*/
   position: relative;
 }
+.main-side {
+  grid-area: main;
+  position: relative;
+}
+
 .footer {
   grid-area: footer;
   width: 100%;
