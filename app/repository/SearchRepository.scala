@@ -19,7 +19,7 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
   implicit  val getResultManager = GetResult(r => ManagerCompany(r.nextString,r.nextString,r.nextString,r.nextString,r.nextString,r.nextString))
   implicit  val managerToJson = Json.writes[ManagerCompany]
 
-  implicit  val getResultSupport = GetResult(r => Support(r.nextString,r.nextString,r.nextString,r.nextString))
+  implicit  val getResultSupport = GetResult(r => Support(r.nextString,r.nextString,r.nextString,r.nextString,r.nextString))
   implicit  val supportToJson = Json.writes[Support]
 
 
@@ -95,6 +95,7 @@ class SearchRepository @Inject()(@play.db.NamedDatabase(value = "searchdb") _dbC
          |       end as typeSupport
          |       ,e.name
          |       ,e.phone
+         |       ,e.uf_mobphone as mobphone
          |from #$dbName..custaddr g
          |INNER JOIN #$dbName..customer c  ON g.cust_num = c.cust_num and c.cust_seq = g.cust_seq and c.cust_seq = 0
          |left outer join #$dbName..gtk_cust_sup s on (s.cust_num = c.cust_num )

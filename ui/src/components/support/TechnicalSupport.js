@@ -42,6 +42,8 @@ const TechnicalSupport = (props) => {
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Ф.И.О.'} dataField={'nameEmployee'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
+                <Column caption={'Моб. телефон'} dataField={'mobphone'}
+                        alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
                 <Column caption={'Телефон'} dataField={'phone'}
                         alignment={'center'}><HeaderFilter allowSearch={true}/></Column>
             </DataGrid>

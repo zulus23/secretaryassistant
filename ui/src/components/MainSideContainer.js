@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './MainSideContainer.css'
-import SearchResult from "./SearchResult";
 import SearchPhoneResult from "./phone/SearchPhoneResult";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import 'react-tabs/style/react-tabs.css';

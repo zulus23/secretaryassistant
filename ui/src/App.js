@@ -4,11 +4,8 @@ import './App.css'
 import ruMessages from 'devextreme/localization/messages/ru.json';
 import 'devextreme-intl';
 import {loadMessages, locale} from 'devextreme/localization';
-import DetailContainer from "./components/DetailContainer";
 import HeaderContainer from "./components/HeaderContainer";
 import MainSideContainer from "./components/MainSideContainer";
-
-
 
 
 function App() {
