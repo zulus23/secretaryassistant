@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './App.css'
 
 import ruMessages from 'devextreme/localization/messages/ru.json';
@@ -8,7 +8,7 @@ import HeaderContainer from "./components/HeaderContainer";
 import MainSideContainer from "./components/MainSideContainer";
 import {useSelector} from "react-redux";
 import {Redirect, Route, Switch} from 'react-router-dom'
-
+import LoginForm from "./components/auth/SignIn";
 
 const PrivateRoute = ({children, ...rest}) => {
     const isAuthenticated = useSelector(state => state.search.authenticated);

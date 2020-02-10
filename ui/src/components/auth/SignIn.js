@@ -1,55 +1,28 @@
-import React, {Fragment, useEffect} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import './SignIn.css'
-import {Form, Formik, useField,} from "formik";
-import {Button, CircularProgress, makeStyles, TextField} from "@material-ui/core";
-import {clearingError, login} from "../../redux/modules/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
+import {Button, TextBox} from "devextreme-react";
 
-
-const useStyles = makeStyles(theme => {
-    return {
-        errorMessage: {color: theme.palette.error.dark, textAlign: "center"},
-        dialog: {width: '300px', height: '200px', margin: '10px auto',border:'2px solid yellow'},
-        field_input: {width: '100%'},
-
-    };
-});
-
-
-const MyTextField = ({placeholder, type, ...props}) => {
-    const [field] = useField(props)
-
-    return (
-        <TextField placeholder={placeholder} type={type}{...field}
-                   style={{width: '100%', paddingBottom: '10px', textAlign: "center"}} onBlur={props.handleBlur} margin="dense" variant="outlined"/>
-    )
-}
 
 const SignInForm = (props) => {
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
     const isAuthenticated = useSelector(state => state.auth.authenticated);
     const error = useSelector(state => state.auth.error);
 
 
     const loginDispatch = useDispatch();
     const errorDispatch = useDispatch();
-    const classes = useStyles();
+
     let history = useHistory();
     let location = useLocation();
     let {from} = location.state || {from: {pathname: "/"}};
-    const t = async (userData) => {
+    const handlerSubmit = (e) => {
+        e.stopPropagation();
 
-        await loginDispatch(login(userData));
-        console.log("after await");
-        return error;
-    }
+        //const userData = trimVal(values);
 
-
-    const handlerSubmit = (values, actions) => {
-        actions.setSubmitting(true);
-        const userData = trimVal(values);
-        const k = t(userData);
-        actions.setSubmitting(false);
     }
 
     useEffect(() => {
@@ -59,37 +32,29 @@ const SignInForm = (props) => {
             console.log("props ", props)
         }
     })
-    const handleBlur = (e) => {
-        errorDispatch(clearingError());
-    }
+
 
     return (
         <div className={'box'}>
-        <div className={classes.dialog}>
-            <Formik initialValues={{username: "", password: ""}} onSubmit={handlerSubmit}>
-                {({values, errors, touched, isSubmitting, dirty}) => (
+            <Fragment>
+                {(error) ? <div>{error}</div> : null}
+                <form autoComplete="off" onSubmit={handlerSubmit}>
 
-                    <Fragment>
-                        {(error) ? <div>{error}</div> : null}
-                        <Form autoComplete="off">
+                    <div>
+                        <TextBox name='username' placeholder='имя пользователя' value={userName}
+                                 valueChangeEvent='keyup'/>
+                    </div>
+                    <div>
 
-                            <div className={classes.field_input}>
-                                <MyTextField name='username' placeholder='имя пользователя' type={"input"}
-                                             handleBlur={handleBlur}/>
-                            </div>
-                            <div className={classes.field_input}>
-                                <MyTextField name='password' placeholder='пароль' type={"password"}/>
-                            </div>
-                            <div style={{height: '100px', display: 'flex', alignItems: 'center'}}>
-                                <Button disabled={isSubmitting} type="submit" fullWidth variant={"outlined"}>
-                                    {isSubmitting ? <CircularProgress size={24}/> : "Войти"}
-                                </Button>
-                            </div>
-                        </Form>
-                    </Fragment>
-                )}
-            </Formik>
-        </div>
+                        <TextBox name='password' placeholder='пароль' value={password} valueChangeEvent='keyup'/>
+                    </div>
+                    <div style={{height: '100px', display: 'flex', alignItems: 'center'}}>
+                        <Button type="submit">Войти</Button>
+                    </div>
+                </form>
+            </Fragment>
+
+
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import {call, put, takeLatest,all} from 'redux-saga/effects'
+import * as api from "../../api";
 
 export const USER_SIGNIN = 'gtk_user_signin_user';
 export const AUTHENTICATED = 'gtk_authenticated_user';
@@ -77,3 +78,7 @@ const successAuthorized = (data) => {
     }
 }
 
+export function login(user) {
+    return {type: USER_SIGNIN, payload: user}
+
+}
