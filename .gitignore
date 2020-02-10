@@ -17,3 +17,4 @@ dist
 /conf/application.conf
 /public/
 /node_modules
+/conf/silhouette.conf

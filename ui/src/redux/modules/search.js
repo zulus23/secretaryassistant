@@ -24,7 +24,8 @@ const initialState = {
     searchingPhone: false,
     managers:[],
     supports:[],
-    phones:[]
+    phones:[],
+    authenticated:null,
 
 }
 

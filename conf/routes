@@ -9,6 +9,8 @@ GET         /                         controllers.FrontendController.index
 
 # An example controller showing how to write asynchronous code
 
+POST        /api/login                  controllers.SignInController.authenticate
+
 POST        /api/searchrequest        controllers.SearchController.search
 POST        /api/loadmanager           controllers.SearchController.loadManager
 POST        /api/loadsupport           controllers.SearchController.loadTechnicalSupport

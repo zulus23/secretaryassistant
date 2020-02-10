@@ -1,0 +1,2 @@
+invalid.credentials="Пользователь и пароль не верные"
+invalid.credentials.user="Такого пользователя нет"

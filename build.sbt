@@ -17,6 +17,12 @@ resolvers += "Akka Snapshot Repository" at "https://repo.akka.io/snapshots/"
 libraryDependencies ++= Seq( jdbc , ehcache , ws , specs2 % Test , guice,
   "com.microsoft.sqlserver" % "mssql-jdbc" % "7.4.1.jre11",
   "com.typesafe.play" %% "play-slick" % "5.0.0",
+  "com.mohiva" %% "play-silhouette" % "6.1.0",
+  "com.mohiva" %% "play-silhouette-password-bcrypt" % "6.1.0",
+  "com.mohiva" %% "play-silhouette-crypto-jca" % "6.1.0",
+  "com.mohiva" %% "play-silhouette-persistence" % "6.1.0",
+  "com.mohiva" %% "play-silhouette-testkit" % "6.1.0" % "test"
+
 )
 
 /*unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )*/

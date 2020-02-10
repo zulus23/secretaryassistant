@@ -6,6 +6,32 @@ import 'devextreme-intl';
 import {loadMessages, locale} from 'devextreme/localization';
 import HeaderContainer from "./components/HeaderContainer";
 import MainSideContainer from "./components/MainSideContainer";
+import {useSelector} from "react-redux";
+
+
+const PrivateRoute = ({children, ...rest}) => {
+    const isAuthenticated = useSelector(state => state.search.authenticated);
+
+    return (
+        <Route
+            {...rest}
+            render={({location}) =>
+                isAuthenticated ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/login",
+                            state: {from: location}
+                        }}
+                    />
+                )
+            }
+        />
+    );
+}
+
+
 
 
 function App() {

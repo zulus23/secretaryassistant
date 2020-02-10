@@ -3,15 +3,24 @@ import axios from 'axios'
 
 const  client = axios.create();
 client.defaults.timeout = 1000 * 60 * 8;
-let axiosConfig  =  () =>{
+let axiosConfig  =  (token) =>{
     return {
         headers: {
             "Content-Type": "application/json;charset=UTF-8",
+            "X-Auth-Token": token
 
         },
 
     }
 };
+export function authentication(user) {
+    return client.post('/api/login',user).catch(function (error)  {
+        console.log(error.response);
+        throw new Error(error.response.data.message.replace(/(["\"])/g,''));
+    });
+}
+
+
 
 
 export function searchCompanyByName(searchData) {
