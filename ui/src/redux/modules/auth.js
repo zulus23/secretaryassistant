@@ -1,5 +1,6 @@
 import {call, put, takeLatest,all} from 'redux-saga/effects'
 
+export const USER_SIGNIN = 'gtk_user_signin_user';
 export const AUTHENTICATED = 'gtk_authenticated_user';
 export const UNAUTHENTICATED = 'gtk_unauthenticated_user';
 export const AUTHENTICATION_ERROR = 'gtk_authentication_error';
@@ -37,7 +38,7 @@ export default function reducer(state = initialState, action) {
 }
 
 export function* authSaga() {
-    yield all([ takeLatest(USER_SIGNIN, authorizathion),takeLatest(USER_SIGNOUT,userSignout)]);
+    yield all([ takeLatest(USER_SIGNIN, authorizathion)]);
 }
 
 function* authorizathion(user) {
@@ -45,7 +46,6 @@ function* authorizathion(user) {
         const userData = user.payload;
         let token = yield call(api.authentication, userData);
         yield put(successAuthorized(token.data));
-        localStorage.setItem('userToken', token.data);
     } catch (e) {
 
         yield put({
@@ -58,9 +58,7 @@ function* authorizathion(user) {
 
 function* userSignout() {
     try {
-        localStorage.removeItem('userToken');
         yield put({type:UNAUTHENTICATED});
-
     } catch (e) {
 
         yield put({

@@ -7,6 +7,7 @@ import {loadMessages, locale} from 'devextreme/localization';
 import HeaderContainer from "./components/HeaderContainer";
 import MainSideContainer from "./components/MainSideContainer";
 import {useSelector} from "react-redux";
+import {Redirect, Route, Switch} from 'react-router-dom'
 
 
 const PrivateRoute = ({children, ...rest}) => {
@@ -32,33 +33,39 @@ const PrivateRoute = ({children, ...rest}) => {
 }
 
 
-
-
 function App() {
     loadMessages(ruMessages);
     locale('ru');
 
     return (
-        <div   className="gtk-main-container">
+        <Fragment>
+            <Switch>
+                <Route exact path={'/login'}>
+                    <LoginForm/>
+                </Route>
 
-            <div id={'notify'} className='header'>
-               <HeaderContainer/>
-            </div>
-           {/* <div className='leftside'>
-                <LeftSideContainer/>
-            </div>
-            <div className='rightside'>
-                <DetailContainer/>
-            </div>*/}
-            <div className={'main-side'}>
-                <MainSideContainer/>
-            </div>
+                <PrivateRoute exac path="/">
+                    <div className="gtk-main-container">
 
-            <div className='footer'>
+                        <div id={'notify'} className='header'>
+                            <HeaderContainer/>
+                        </div>
 
-            </div>
+                        <div className={'main-side'}>
+                            <MainSideContainer/>
+                        </div>
 
-        </div>
+                        <div className='footer'>
+
+                        </div>
+
+                    </div>
+                </PrivateRoute>
+
+            </Switch>
+
+
+        </Fragment>
     );
 }
 
