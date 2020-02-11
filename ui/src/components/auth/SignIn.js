@@ -2,12 +2,17 @@ import React, {Fragment, useEffect, useState} from "react";
 import './SignIn.css'
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
-import {Button, TextBox} from "devextreme-react";
+
+import Form, {
+    SimpleItem,
+    GroupItem,
+    Label, ButtonItem
+} from 'devextreme-react/form';
 
 
 const SignInForm = (props) => {
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [userInfo, setUserInfo] = useState({username:'',password:''});
+
     const isAuthenticated = useSelector(state => state.auth.authenticated);
     const error = useSelector(state => state.auth.error);
 
@@ -19,8 +24,8 @@ const SignInForm = (props) => {
     let location = useLocation();
     let {from} = location.state || {from: {pathname: "/"}};
     const handlerSubmit = (e) => {
-        e.stopPropagation();
-
+        e.preventDefault();
+        console.log(" ------------------------- ", userInfo);
         //const userData = trimVal(values);
 
     }
@@ -32,27 +37,41 @@ const SignInForm = (props) => {
             console.log("props ", props)
         }
     })
-
+    const passwordOptions = {
+        mode:'password'
+    }
+    const buttonOptions = {
+        text: 'Войти',
+        useSubmitBehavior: true
+    };
+    const fieldDataChangeHandler = (e) => {
+        console.log(" fieldDataChangeHandler ", e);
+    }
 
     return (
-        <div className={'box'}>
-            <Fragment>
-                {(error) ? <div>{error}</div> : null}
-                <form autoComplete="off" onSubmit={handlerSubmit}>
+        <div className={'content'}>
+            <div className='gtk-auth-panel'>
+                <form  onSubmit={handlerSubmit} className='gtk-auth-form'>
+                <Form  formData={userInfo}  autoComplete="off" onFieldDataChanged={fieldDataChangeHandler}
+                       colCount={1} labelLocation={'top'}>
 
-                    <div>
-                        <TextBox name='username' placeholder='имя пользователя' value={userName}
-                                 valueChangeEvent='keyup'/>
-                    </div>
-                    <div>
+                    <GroupItem colCount={1}>
+                        <SimpleItem dataField={'username'} editorType="dxTextBox" isRequired colSpan={1}>
+                            <Label text={'Имя пользователя'} />
+                        </SimpleItem>
+                    </GroupItem>
 
-                        <TextBox name='password' placeholder='пароль' value={password} valueChangeEvent='keyup'/>
-                    </div>
-                    <div style={{height: '100px', display: 'flex', alignItems: 'center'}}>
-                        <Button type="submit">Войти</Button>
-                    </div>
+                    <GroupItem colCount={1}>
+                        <SimpleItem dataField={'password'} editorType="dxTextBox" editorOptions={passwordOptions}>
+                            <Label text={'Пароль'}/>
+                        </SimpleItem>
+                    </GroupItem>
+                    <GroupItem colCount={1}>
+                        <ButtonItem cssClass={'gtk-button'} horizontalAlignment="center" buttonOptions={buttonOptions}  />
+                    </GroupItem>
+                </Form>
                 </form>
-            </Fragment>
+            </div>
 
 
         </div>

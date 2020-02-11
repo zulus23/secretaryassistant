@@ -1,18 +1,82 @@
-.MuiInputBase-input {
-  text-align: center;
-}
-.box {
+
+/*.box {
   height: 100%;
   display: flex;
 
   justify-content: center;
   align-items: center;
   border: 2px solid tomato;
-}
+}*/
 .content {
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+
+}
+
+.gtk-button {
+
+}
+
+.dx-button.dx-button-normal.dx-button-mode-contained.dx-widget.dx-button-has-text {
+  font-family: Montserrat,'DejaVu Sans', Arial, Helvetica, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 20px;
+  box-shadow: 0 0.04em 0.1em rgba(0,0,0,0.45);
+  width: 100%;
+  height: 2.3em;
+}
+
+.gtk-auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 300px;
+  border: 2px solid #8899a8;
+  box-shadow: 0 0.1em 0.2em rgba(0,0,0,0.45);
+  font-family: Montserrat,'DejaVu Sans', Arial, Helvetica, sans-serif;
+}
+.gtk-auth-form {
+  width: 300px;
+
+}
+.dx-field-item-label-text {
+  font-size: 1.2em;
+  line-height: 1.5;
+  font-weight: bold;
+  color: #2a333b;
+  text-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 1px;
+}
+
+.dx-field-item-label.dx-field-item-label-location-top {
+  font-family: Montserrat,'DejaVu Sans', Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding-bottom: 5px;
+  font-weight: bold;
+  text-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 1px;
+
+}
+input[type="text"] {
+  background-color: rgb(255,255,255);
+  box-shadow: rgba(0,0,0,0.0745098) 0px 1px 1px inset;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204,204,204);
+  border-image: initial;
+  transition: border 0.2s linear,box-shadow 0.2s linear;
+
+}
+input[type="password"] {
+  background-color: rgb(255,255,255);
+  box-shadow: rgba(0,0,0,0.0745098) 0px 1px 1px inset;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204,204,204);
+  border-image: initial;
+  transition: border 0.2s linear,box-shadow 0.2s linear;
+
 }
