@@ -2,6 +2,7 @@ package modules
 
 
 
+import authentication.models.daos.{UserDAO, UserDAOImpl}
 import authentication.utils.{CustomSecuredErrorHandler, CustomUnsecuredErrorHandler}
 import com.google.inject.{AbstractModule, Provides}
 import com.mohiva.play.silhouette.api.actions.{SecuredErrorHandler, UnsecuredErrorHandler}
@@ -9,7 +10,7 @@ import com.mohiva.play.silhouette.api.crypto.{Crypter, CrypterAuthenticatorEncod
 import com.mohiva.play.silhouette.api.repositories.AuthInfoRepository
 import com.mohiva.play.silhouette.api.services.AuthenticatorService
 import com.mohiva.play.silhouette.api.util.{Clock, FingerprintGenerator, HTTPLayer, IDGenerator, PasswordHasherRegistry, PasswordInfo, PlayHTTPLayer}
-import com.mohiva.play.silhouette.api.{Environment, EventBus, Silhouette, SilhouetteProvider}
+import com.mohiva.play.silhouette.api.{Environment, EventBus, LoginInfo, Silhouette, SilhouetteProvider}
 import com.mohiva.play.silhouette.crypto.{JcaCrypter, JcaCrypterSettings}
 import com.mohiva.play.silhouette.impl.authenticators._
 import com.mohiva.play.silhouette.impl.providers.CredentialsProvider
@@ -42,10 +43,10 @@ class SilhouetteModule extends AbstractModule with ScalaModule with AkkaGuiceSup
     bind[Silhouette[JWTEnv]].to[SilhouetteProvider[JWTEnv]]
     bind[UnsecuredErrorHandler].to[CustomUnsecuredErrorHandler]
     bind[SecuredErrorHandler].to[CustomSecuredErrorHandler]
-    //bind[UserDAO].to[UserDAOMssql]
-    bind[DelegableAuthInfoDAO[PasswordInfo]].toInstance(new InMemoryAuthInfoDAO[PasswordInfo])
-     bind[DelegableAuthInfoDAO[PasswordInfo]].toInstance(new InMemoryAuthInfoDAO[PasswordInfo])
+
     bind[UserService].to[UserServiceImpl]
+    bind[UserDAO].to[UserDAOImpl]
+    bind[DelegableAuthInfoDAO[PasswordInfo]].toInstance(new InMemoryAuthInfoDAO[PasswordInfo])
 
     bind[IDGenerator].toInstance(new SecureRandomIDGenerator())
     bind[FingerprintGenerator].toInstance(new DefaultFingerprintGenerator(false))
@@ -122,6 +123,7 @@ class SilhouetteModule extends AbstractModule with ScalaModule with AkkaGuiceSup
   @Provides
   def provideAuthInfoRepository(passwordInfoDAO: DelegableAuthInfoDAO[PasswordInfo]): AuthInfoRepository = {
 
+    passwordInfoDAO.add(LoginInfo("credentials","1"),PasswordInfo("dummy-hasher","1"))
     new DelegableAuthInfoRepository(passwordInfoDAO)
   }
 

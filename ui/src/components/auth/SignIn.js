@@ -8,6 +8,7 @@ import Form, {
     GroupItem,
     Label, ButtonItem
 } from 'devextreme-react/form';
+import {login} from "../../redux/modules/auth";
 
 
 const SignInForm = (props) => {
@@ -26,8 +27,9 @@ const SignInForm = (props) => {
     const handlerSubmit = (e) => {
         e.preventDefault();
         console.log(" ------------------------- ", userInfo);
-        //const userData = trimVal(values);
-
+        const userData = trimVal(userInfo);
+        console.log(" ------------------------- ", userData);
+        loginDispatch(login(userData));
     }
 
     useEffect(() => {

@@ -2,7 +2,7 @@ package controllers
 
 import akka.http.scaladsl.model.HttpHeader.ParsingResult.Ok
 import authentication.forms.SignInForm
-import authentication.model.UserCredential
+import authentication.models.UserCredential
 import authentication.services.UserService
 import authentication.utils.JWTEnv
 import com.mohiva.play.silhouette
@@ -49,12 +49,15 @@ class SignInController @Inject() (components: ControllerComponents,
       val credentials = Credentials(request.body.username, request.body.password)
       credentialsProvider.authenticate(credentials).flatMap { loginInfo =>
         userService.retrieve(loginInfo).flatMap {
-          case Some(user) => silhouette.env.authenticatorService.create(loginInfo).map {
-            case authenticator => authenticator
-          }.flatMap { authenticator =>
-            silhouette.env.eventBus.publish(LoginEvent(user, request))
-            silhouette.env.authenticatorService.init(authenticator).map { token =>
-              Ok(token)
+          case Some(user) => {
+            val k =  loginInfo
+            silhouette.env.authenticatorService.create(loginInfo).map {
+              case authenticator => authenticator
+            }.flatMap { authenticator =>
+              silhouette.env.eventBus.publish(LoginEvent(user, request))
+              silhouette.env.authenticatorService.init(authenticator).map { token =>
+                Ok(token)
+              }
             }
           }
           case None => Future.failed(new IdentityNotFoundException("Couldn't find user"))
