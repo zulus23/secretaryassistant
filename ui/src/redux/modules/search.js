@@ -81,9 +81,10 @@ const showErrorNotification = (error) =>{
 function* searching(data) {
 
     try {
-       const searchRequest = data.payload;
-       const result = yield call(api.searchCompanyByName,searchRequest);
-       const resultPhone = yield call(api.searchPhoneByCodeAndName,searchRequest);
+       const searchRequest = data.payload.searchData;
+       const token = data.payload.token;
+       const result = yield call(api.searchCompanyByName,searchRequest,token);
+       const resultPhone = yield call(api.searchPhoneByCodeAndName,searchRequest,token);
        yield put(finishSearch(result.data));
        yield put(finishSearchPhone(resultPhone.data));
    }catch (e) {
@@ -94,9 +95,15 @@ function* searching(data) {
 function* loadDetailRow(data) {
     try{
        yield put(startLoadDetail());
-       const codeCompany = data.payload;
-       const manager = yield call(api.loadManager,codeCompany);
-       const support = yield call(api.loadTechnicalSupport,codeCompany);
+
+       const codeCompany = {
+           codeCompany:data.payload.codeCompany
+       };
+       const token = data.payload.token
+
+
+       const manager = yield call(api.loadManager,codeCompany,token);
+       const support = yield call(api.loadTechnicalSupport,codeCompany,token);
        yield put(finishLoadManager(manager.data));
        yield put(finishLoadSupport(support.data));
 
@@ -151,7 +158,7 @@ export function  finishSearchPhone(data) {
     }
 }
 export function errorSearch(error) {
-    console.log("errorSearcherrorSearch ",error);
+
     return {
         type:GTK_ERROR_SEARCH,
         payload:error

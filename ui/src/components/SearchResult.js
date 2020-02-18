@@ -9,6 +9,7 @@ import {selectedSearchRow} from "../redux/modules/search";
 const SearchResult = (props) => {
     const resultSearchData = useSelector(state => state.search.searchResult, shallowEqual);
     const isLoading = useSelector(state => state.search.searching, shallowEqual);
+    const token = useSelector(state => state.auth.token, shallowEqual);
     const gridRef = React.createRef();
     useEffect(() => {
         if(isLoading) {
@@ -20,7 +21,7 @@ const SearchResult = (props) => {
     const dispatchSelectRecord = useDispatch()
     const onSelectionChanged = ({selectedRowsData}) => {
         const data = selectedRowsData[0];
-        data && dispatchSelectRecord(selectedSearchRow({codeCompany: data.code}));
+        data && dispatchSelectRecord(selectedSearchRow({codeCompany: data.code,token:token}));
 
     }
 

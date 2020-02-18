@@ -56,6 +56,7 @@ function* authorizathion(user) {
     }
 
 }
+/*
 
 function* userSignout() {
     try {
@@ -68,6 +69,7 @@ function* userSignout() {
         })
     }
 }
+*/
 
 
 
@@ -81,4 +83,10 @@ const successAuthorized = (data) => {
 export function login(user) {
     return {type: USER_SIGNIN, payload: user}
 
+}
+
+export const clearingError = () => {
+    return {
+        type: AUTHENTICATION_ERROR_CLEAR
+    }
 }

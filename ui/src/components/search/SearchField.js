@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {startSearch} from "../../redux/modules/search";
 import { TextBox } from 'devextreme-react';
 import './SearchField.css'
@@ -8,13 +8,14 @@ import './SearchField.css'
 const SearchField = () => {
     const [searchValue,setSearchValue] = useState("")
     const searchDispatch = useDispatch();
+    const token = useSelector(state => state.auth.token);
 
     const changeEventHandler = (e) => {
         const data = e.value;
         setSearchValue(data)
         const sendData = {
-            searchValue:data,
-            typeRequest:'company'
+            token: token,
+            searchData:{searchValue:data,typeRequest:'company'}
         }
         if(data.length > 3)
         searchDispatch(startSearch(sendData));

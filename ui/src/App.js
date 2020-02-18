@@ -11,7 +11,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 import LoginForm from "./components/auth/SignIn";
 
 const PrivateRoute = ({children, ...rest}) => {
-    const isAuthenticated = useSelector(state => state.search.authenticated);
+    const isAuthenticated = useSelector(state => state.auth.authenticated);
 
     return (
         <Route
